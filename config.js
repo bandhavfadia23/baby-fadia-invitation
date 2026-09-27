@@ -1,0 +1,1 @@
+window.SITE_CONFIG={SUPABASE_URL:"https://vygypseafhxkprnixeqr.supabase.co/rest/v1/",SUPABASE_ANON_KEY:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5Z3lwc2VhZmh4a3Bybml4ZXFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA1MTY1NzQsImV4cCI6MjEwNjA5MjU3NH0.o-PuPy75182xz7JLLHzNLScYJl8CkHATnl_VVg6tQ1U",ADMIN_EMAILS:["bandhav23@gmail.com"],DEMO_MODE:False};
