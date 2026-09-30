@@ -13,7 +13,7 @@ async function copyLink(code){await navigator.clipboard.writeText(`${location.or
 Bandhav & Shreya would be delighted to celebrate with you.
 
 Invitation code: ${i.token}
-Website: ${location.origin}
+Website: ${SITE_CONFIG.SITE_URL}
 
 Please RSVP by October 10, 2026.`;window.open(`https://wa.me/${i.phone.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank')}
 function exportData(){const event=state.events.find(e=>e.id===state.selected),list=event?invitationsForEvent(event.id):state.invitations;const rows=[['Family','Code','Email','Phone','Category','Status','Expected people','Events'],...list.map(i=>[i.primary_name,i.token,i.email||'',i.phone||'',i.category||'',statusFor(i,state.selected),attendanceFor(i,state.selected),state.assignments.filter(a=>a.invitation_id===i.id).map(a=>state.events.find(e=>e.id===a.event_id)?.name).filter(Boolean).join('; ')])];const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`${event?.slug||'all'}-families.csv`;a.click()}
