@@ -6,7 +6,32 @@
       alert('Add a phone number first.');
       return;
     }
-    const message = `🎃 Our Little Pumpkin 🎃\n\nHi ${family.primary_name},\n\nBandhav & Shreya would be delighted to celebrate with you.\n\nYour Invitation Code:\n${family.token}\n\n🌎 Explore Our Story & RSVP\n${SITE_CONFIG.SITE_URL}\n\n🎁 Baby Registry\n${REGISTRY_URL}\n\nYour presence and blessings are more than enough. For family and friends who have asked, we have created a small registry for Baby Fadia.\n\nRSVP Deadline: October 10, 2026\nCelebration Date: November 1, 2026\n\nLove,\nBandhav & Shreya`;
+    const inviteUrl = `${SITE_CONFIG.SITE_URL}/invite.html?token=${family.token}`;
+    const message = `🎃 Important Celebration Update 🎃
+
+Hi ${family.primary_name},
+
+Our celebration dates have changed, and the Baby Shower venue has changed. Your previous RSVP is still saved. Please open your private invitation and reconfirm attendance.
+
+Goyni
+November 15, 2026 · 10:00 AM–12:00 PM
+
+Srimant
+November 22, 2026 · 9:00 AM
+67 Bermondsey Way, Brampton
+
+Baby Shower
+November 22, 2026 · 5:00 PM–9:00 PM
+Tandoori Tikka Lounge
+232A Guelph St Unit 11-12, Georgetown, ON L7G 4B1
+
+Your Invitation Code: ${family.token}
+Open and reconfirm: ${inviteUrl}
+
+Please reconfirm by November 1, 2026.
+
+Love,
+Bandhav & Shreya`;
     window.open(`https://wa.me/${family.phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`, '_blank');
   };
 })();
