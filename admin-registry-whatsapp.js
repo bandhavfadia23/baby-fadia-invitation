@@ -28,7 +28,7 @@ Tandoori Tikka Lounge
 Your Invitation Code: ${family.token}
 Open and reconfirm: ${inviteUrl}
 
-Please reconfirm by November 1, 2026.
+Please reconfirm by November 7, 2026.
 
 Love,
 Bandhav & Shreya`;
