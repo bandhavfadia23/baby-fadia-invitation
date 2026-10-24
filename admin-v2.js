@@ -11,7 +11,35 @@ async function removeFamily(){if(!state.editing||!confirm('Delete this family, e
 async function copyLink(code){await navigator.clipboard.writeText(`${SITE_CONFIG.SITE_URL}/invite.html?token=${code}`);managerMessage.textContent=`Invitation link copied for ${code}.`;setTimeout(()=>managerMessage.textContent='',2500)}function getWhatsAppFamily(id){const i=state.invitations.find(x=>x.id===id);if(!i?.phone){alert('Add a phone number first.');return null}return i}
 function sendWhatsApp(i,msg){window.open(`https://wa.me/${i.phone.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank')}
 function openNewInviteWhatsApp(id){const i=getWhatsAppFamily(id);if(!i)return;const home=`${SITE_CONFIG.SITE_URL}`;const privateLink=`${SITE_CONFIG.SITE_URL}/invite.html?token=${i.token}`;const msg=`\u{1F9E1} Our Little Pumpkin \u{1F9E1}\n\nHi ${i.primary_name},\n\nA tiny blessing is on the way, and Bandhav & Shreya would be delighted to share this beautiful journey with you.\n\n\u{1F310} Explore our baby story\n${home}\n\n\u{1F48C} Your private invitation\n${privateLink}\n\nInvitation code: ${i.token}\n\nYour private page will show only the celebration details selected especially for your family. Please RSVP by November 7, 2026.\n\n\u{1F381} Baby Registry\nhttps://www.amazon.ca/baby-reg/bandhav-fadia-shreya-fadia-january-2027-brampton/BJLY8FL44WA7\n\nYour presence and blessings are more than enough. For family and friends who have asked, we have created a small registry for Baby Fadia.\n\nLove,\nBandhav & Shreya`;sendWhatsApp(i,msg)}
-function openDateChangeWhatsApp(id){const i=getWhatsAppFamily(id);if(!i)return;const home=`${SITE_CONFIG.SITE_URL}`;const privateLink=`${SITE_CONFIG.SITE_URL}/invite.html?token=${i.token}`;const msg=`\u{1F4E2} Important Celebration Update\n\nHi ${i.primary_name},\n\nWe wanted to let you know that the celebration details connected to your family invitation have been updated.\n\nTo protect the privacy of each family's invitation, the dates, time and venue are shown only on your private invitation page.\n\nYour previous RSVP is still saved. Please open your private invitation, review the updated details and reconfirm your attendance by November 7, 2026.\n\n\u{1F310} Baby Fadia story\n${home}\n\n\u{1F48C} Review your private update and reconfirm\n${privateLink}\n\nInvitation code: ${i.token}\n\nThank you for your love and understanding. We look forward to celebrating with you.\n\nLove,\nBandhav & Shreya`;sendWhatsApp(i,msg)}
+function openDateChangeWhatsApp(id){
+    const i = getWhatsAppFamily(id);
+    if(!i) return;
+
+    const privateLink =
+      `${SITE_CONFIG.SITE_URL}/invite.html?token=${i.token}`;
+
+    const msg =
+`📢 Important Celebration Update
+
+Hi ${i.primary_name},
+
+We wanted to let you know that the celebration dates and venue have been updated.
+
+Your previous RSVP is still saved. Please open your private invitation, review the updated details and reconfirm your attendance by November 7, 2026.
+
+💌 Review your private update and reconfirm
+
+${privateLink}
+
+Invitation code: ${i.token}
+
+Thank you for your love and understanding. We look forward to celebrating with you.
+
+Love,
+Bandhav & Shreya`;
+
+    sendWhatsApp(i,msg);
+}
 window.openWhatsApp=openNewInviteWhatsApp;window.openNewInviteWhatsApp=openNewInviteWhatsApp;window.openDateChangeWhatsApp=openDateChangeWhatsApp;
 function exportData(){const event=state.events.find(e=>e.id===state.selected),list=event?invitationsForEvent(event.id):state.invitations;const rows=[['Family','Code','Email','Phone','Category','Status','Expected people','Reconfirmed','Reconfirmed at','Events'],...list.map(i=>[i.primary_name,i.token,i.email||'',i.phone||'',i.category||'',statusFor(i,state.selected),attendanceFor(i,state.selected),rsvpForInvitation(i.id)?.reconfirmed?'Yes':'No',rsvpForInvitation(i.id)?.reconfirmed_at||'',state.assignments.filter(a=>a.invitation_id===i.id).map(a=>state.events.find(e=>e.id===a.event_id)?.name).filter(Boolean).join('; ')])];const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`${event?.slug||'all'}-families.csv`;a.click()}
 googleSignIn.onclick=login;signOut.onclick=logout;deniedSignOut.onclick=logout;addFamily.onclick=()=>openFamily();closeDialog.onclick=cancelDialog.onclick=()=>familyDialog.close();familyName.oninput=()=>{if(!state.editing)familyCode.value=makeCode(familyName.value);updatePreview()};familyCode.oninput=()=>{familyCode.value=familyCode.value.toUpperCase();updatePreview()};familyForm.onsubmit=saveFamilyRecord;deleteFamily.onclick=removeFamily;familySearch.oninput=renderFamilies;statusFilter.onchange=renderFamilies;refreshData.onclick=loadAll;exportCsv.onclick=exportData;db.auth.getSession().then(({data})=>route(data.session));db.auth.onAuthStateChange((_e,s)=>route(s));
