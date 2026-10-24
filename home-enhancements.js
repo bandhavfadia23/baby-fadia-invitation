@@ -8,13 +8,13 @@
     panel.innerHTML = `
       <div class="date-block deadline-block">
         <span class="date-label">RSVP DEADLINE</span>
-        <strong class="date-day">October 10</strong>
+        <strong class="date-day">November 7</strong>
         <span class="date-year">2026</span>
       </div>
       <div class="date-divider" aria-hidden="true"></div>
       <div class="date-block celebration-block">
         <span class="date-label">CELEBRATION DATE</span>
-        <strong class="date-day">November 1</strong>
+        <strong class="date-day">November 22</strong>
         <span class="date-year">2026</span>
       </div>`;
   }
@@ -72,9 +72,9 @@
       <p class="eyebrow">GOOD TO KNOW</p>
       <h2>Celebration details</h2>
       <div class="faq-grid">
-        <details open><summary>When is the celebration?</summary><p>The main celebrations are on November 1, 2026. Your private invitation shows the exact event, time and location assigned to your family.</p></details>
-        <details><summary>What is the RSVP deadline?</summary><p>Please respond by October 10, 2026.</p></details>
-        <details><summary>What should I wear?</summary><p>Your private invitation shows the attire for each celebration assigned to your family.</p></details>
+        <details open><summary>When is the celebration?</summary><p>The main celebrations are on November 22, 2026. Your private invitation shows the exact event, time and location assigned to your family.</p></details>
+        <details><summary>What is the RSVP deadline?</summary><p>Please respond by November 7, 2026.</p></details>
+        <details><summary>What should I wear to a baby shower?</summary><p>• Dress code: Western attire • We invite you to dress in Western-style attire for the celebration.</p></details>
         <details><summary>Is there a baby registry?</summary><p>Yes. The Amazon registry is available from the Registry section above.</p></details>
       </div>`;
     closing.insertAdjacentElement('beforebegin', faq);
